@@ -1,5 +1,5 @@
-const app = require("./app");
-const connectDatabase = require("./config/database");
+const app = require("./backend/app");
+const connectDatabase = require("./backend/config/database");
 
 // const dotenv = require("dotenv");
 const cloudinary = require("cloudinary");
