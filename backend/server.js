@@ -1,7 +1,7 @@
 const app = require("./app");
 const connectDatabase = require("./config/database");
 
-const dotenv = require("dotenv");
+// const dotenv = require("dotenv");
 const cloudinary = require("cloudinary");
 
 // Handlingg Uncaught exception error
@@ -15,8 +15,11 @@ process.on("uncaughtException", (err) => {
 
 //setting up config file
 if (process.env.NODE_ENV !== "PRODUCTION") {
-  dotenv.config({ path: "backend/config/config.env" });
+  require("dotenv").config({ path: "backend/config/config.env" });
 }
+
+console.log("NODE_ENV:", process.env.NODE_ENV);
+console.log("MONGODB_URI:", process.env.DB_URI);
 
 // connecting to database
 connectDatabase();
