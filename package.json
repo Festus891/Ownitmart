@@ -1,0 +1,33 @@
+{
+  "name": "ownitmart",
+  "version": "1.0.0",
+  "description": "full  ecommerce site using mern",
+  "main": "server.js",
+  "scripts": {
+    "script": "node backend/server.js",
+    "dev": "SET NODE_ENV=DEVELOPMENT& nodemon backend/server",
+    "prod": "SET NODE_ENV=PRODUCTION& nodemon backend/server",
+    "seeder": "node backend/utils/seeder.js",
+    "build": "cd ../frontend && npm install && npm run build"
+  },
+  "author": "Aderibigbe festus",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "cloudinary": "^2.0.3",
+    "cookie-parser": "^1.4.6",
+    "cookies-parser": "^1.2.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-fileupload": "^1.5.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.0.3",
+    "nodemailer": "^6.9.8",
+    "stripe": "^15.4.0",
+    "validator": "^13.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
