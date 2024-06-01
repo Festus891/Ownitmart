@@ -1,6 +1,9 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 // module.exports = app;
+
+app.use(cors());
 
 const cookieParser = require("cookie-parser");
 const bodyparser = require("body-parser");
@@ -18,7 +21,7 @@ if (process.env.NODE_ENV !== "PRODUCTION") {
 
 // Example route
 app.get("/", (req, res) => {
-  res.send("API is working");
+  res.send("API is working and CORS-enabled for all origins!");
 });
 
 // Define your API routes
