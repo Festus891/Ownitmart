@@ -15,6 +15,17 @@ const errorMiddleware = require("./middlewares/errors");
 if (process.env.NODE_ENV !== "PRODUCTION") {
   dotenv.config({ path: "backend/config/config.env" });
 }
+
+// Example route
+app.get("/", (req, res) => {
+  res.send("API is working");
+});
+
+// Define your API routes
+app.get("/api/v1/products", (req, res) => {
+  res.send("Example API endpoint");
+});
+
 app.use(express.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(cookieParser());

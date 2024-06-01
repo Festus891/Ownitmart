@@ -28,11 +28,6 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// Example route for root URL
-app.get("/", (req, res) => {
-  res.send("Hello, world!");
-});
-
 const server = app.listen(process.env.PORT, () => {
   console.log(
     `server started on PORT: ${process.env.PORT} in ${process.env.NODE_ENV} mode.`
