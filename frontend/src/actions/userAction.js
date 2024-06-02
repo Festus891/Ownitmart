@@ -1,4 +1,5 @@
 import axios from "axios";
+import axiosInstance from "./axiosConfig";
 import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -53,11 +54,14 @@ export const login = (email, password) => async (dispatch) => {
       headers: { "Content-Type": "application/json" },
     };
 
-    const { data } = await axios.post(
-      `${baseUrl}/login`,
+    const { data } = await axiosInstance.post(
+      `/login`,
       { email, password },
       config
     );
+
+    // Log the response data
+    console.log("Login response data token to pass:", data?.token);
 
     dispatch({
       type: LOGIN_SUCCESS,

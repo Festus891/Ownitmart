@@ -20,6 +20,7 @@ import {
   CLEAR_ERRORS,
 } from "../constants/orderConstants";
 import axios from "axios";
+import axiosInstance from "./axiosConfig";
 import { baseUrl } from "./baseUrl";
 
 // Set default options for all requests
@@ -59,7 +60,7 @@ export const myOrders = () => async (dispatch) => {
       type: MY_ORDERS_REQUEST,
     });
 
-    const { data } = await axios.get(`${baseUrl}/orders/me`);
+    const { data } = await axiosInstance.get(`/orders/me`);
 
     dispatch({
       type: MY_ORDERS_SUCCESS,
