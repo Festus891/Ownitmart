@@ -3,7 +3,7 @@ const app = express();
 const cors = require("cors");
 // module.exports = app;
 const corsOptions = {
-  origin: "http://localhost:3000/", // replace with your frontend domain
+  origin: "http://localhost:3000", // replace with your frontend domain
   credentials: true,
 };
 
