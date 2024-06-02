@@ -20,7 +20,12 @@ import {
   CLEAR_ERRORS,
 } from "../constants/orderConstants";
 import axios from "axios";
+import { baseUrl } from "./baseUrl";
 
+// Set default options for all requests
+axios.defaults.withCredentials = true;
+
+// user create a new order
 export const createOrder = (order) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -33,7 +38,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post("/api/v1/order/new", order, config);
+    const { data } = await axios.post(`${baseUrl}/order/new`, order, config);
 
     dispatch({
       type: CREATE_ORDER_SUCCESS,
@@ -54,7 +59,7 @@ export const myOrders = () => async (dispatch) => {
       type: MY_ORDERS_REQUEST,
     });
 
-    const { data } = await axios.get("/api/v1/orders/me");
+    const { data } = await axios.get(`${baseUrl}/orders/me`);
 
     dispatch({
       type: MY_ORDERS_SUCCESS,
@@ -75,7 +80,7 @@ export const getOrderdetails = (id) => async (dispatch) => {
       type: ORDERS_DETAILS_REQUEST,
     });
 
-    const { data } = await axios.get(`/api/v1/order/${id}`);
+    const { data } = await axios.get(`${baseUrl}/order/${id}`);
 
     dispatch({
       type: ORDERS_DETAILS_SUCCESS,
@@ -96,7 +101,7 @@ export const allOrders = () => async (dispatch) => {
       type: ALL_ORDERS_REQUEST,
     });
 
-    const { data } = await axios.get("/api/v1/admin/orders");
+    const { data } = await axios.get(`${baseUrl}/admin/orders`);
 
     dispatch({
       type: ALL_ORDERS_SUCCESS,
@@ -110,7 +115,7 @@ export const allOrders = () => async (dispatch) => {
   }
 };
 
-// update ordeer action
+// update order action (Admin)
 export const updateOrder = (id, orderData) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -124,7 +129,7 @@ export const updateOrder = (id, orderData) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `/api/v1/admin/order/${id}`,
+      `${baseUrl}/admin/order/${id}`,
       orderData,
       config
     );
@@ -141,14 +146,14 @@ export const updateOrder = (id, orderData) => async (dispatch, getState) => {
   }
 };
 
-// Delete order action
+// Delete order action (BY admin)
 export const deleteOrder = (id) => async (dispatch, getState) => {
   try {
     dispatch({
       type: DELETE_ORDER_REQUEST,
     });
 
-    const { data } = await axios.delete(`/api/v1/admin/order/${id}`);
+    const { data } = await axios.delete(`${baseUrl}/order/${id}`);
 
     dispatch({
       type: DELETE_ORDER_SUCCESS,

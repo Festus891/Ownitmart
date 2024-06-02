@@ -2,8 +2,12 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 // module.exports = app;
+const corsOptions = {
+  origin: "http://localhost:3000/", // replace with your frontend domain
+  credentials: true,
+};
 
-app.use(cors());
+app.use(cors(corsOptions));
 
 const cookieParser = require("cookie-parser");
 const bodyparser = require("body-parser");
