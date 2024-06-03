@@ -9,6 +9,8 @@ const sendToken = (user, statusCode, res) => {
       Date.now() + process.env.COOKIES_EXPIRES_TIME * 24 * 60 * 60 * 1000
     ),
     httpOnly: true,
+    secure: true, // Ensure cookie is only sent over HTTPS
+    sameSite: "None", // required for cross-site requests
   };
 
   res.status(statusCode).cookie("token", token, options).json({

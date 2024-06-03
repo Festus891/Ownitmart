@@ -1,5 +1,5 @@
 import axios from "axios";
-import axiosInstance from "./axiosConfig";
+// import axiosInstance from "./axiosConfig";
 import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -38,10 +38,10 @@ import {
   LOGOUT_FAIL,
   CLEAR_ERRORS,
 } from "../constants/userConstant";
-import { baseUrl } from "./baseUrl";
+// import { baseUrl } from "./baseUrl";
 
 // Set default options for all requests
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
 
 // LOGIN
 export const login = (email, password) => async (dispatch) => {
@@ -54,14 +54,14 @@ export const login = (email, password) => async (dispatch) => {
       headers: { "Content-Type": "application/json" },
     };
 
-    const { data } = await axiosInstance.post(
-      `/login`,
+    const { data } = await axios.post(
+      `/api/v1/login`,
       { email, password },
       config
     );
 
     // Log the response data
-    console.log("Login response data token to pass:", data?.token);
+    // console.log("Login response data token to pass:", data?.token);
 
     dispatch({
       type: LOGIN_SUCCESS,
@@ -82,7 +82,7 @@ export const register = (userData) => async (dispatch) => {
       type: REGISTER_USER_REQUEST,
     });
 
-    const { data } = await axios.post(`${baseUrl}/register`, userData);
+    const { data } = await axios.post(`/api/v1/register`, userData);
 
     dispatch({
       type: REGISTER_USER_SUCCESS,
@@ -103,7 +103,7 @@ export const loadUser = () => async (dispatch) => {
       type: LOAD_USER_REQUEST,
     });
 
-    const { data } = await axios.get(`${baseUrl}/me`);
+    const { data } = await axios.get(`/api/v1/me`);
 
     dispatch({
       type: LOAD_USER_SUCCESS,
@@ -124,7 +124,7 @@ export const updateProfile = (userData) => async (dispatch) => {
       type: UPDATE_PROFILE_REQUEST,
     });
 
-    const { data } = await axios.put(`${baseUrl}/me/update`, userData);
+    const { data } = await axios.put(`/api/v1/me/update`, userData);
 
     dispatch({
       type: UPDATE_PROFILE_SUCCESS,
@@ -152,7 +152,7 @@ export const updatePassword = (passwords) => async (dispatch) => {
     };
 
     const { data } = await axios.put(
-      `${baseUrl}/password/update`,
+      `/api/v1/password/update`,
       passwords,
       config
     );
@@ -182,11 +182,7 @@ export const forgotPassword = (email) => async (dispatch) => {
       },
     };
 
-    const { data } = await axios.post(
-      `${baseUrl}/password/forget`,
-      email,
-      config
-    );
+    const { data } = await axios.post(`/api/v1/password/forget`, email, config);
 
     dispatch({
       type: FORGOT_PASSWORD_SUCCESS,
@@ -214,7 +210,7 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
     };
 
     const { data } = await axios.put(
-      `${baseUrl}/password/reset/${token}`,
+      `/api/v1/password/reset/${token}`,
       passwords,
       config
     );
@@ -234,7 +230,7 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
 // Logout user
 export const logout = () => async (dispatch) => {
   try {
-    await axios.get(`${baseUrl}/logout`);
+    await axios.get(`/api/v1/logout`);
 
     dispatch({
       type: LOGOUT_SUCCESS,
@@ -254,7 +250,7 @@ export const allUsers = () => async (dispatch) => {
       type: ALL_USERS_REQUEST,
     });
 
-    const { data } = await axios.get(`${baseUrl}/admin/users`);
+    const { data } = await axios.get(`/api/v1/admin/users`);
 
     dispatch({
       type: ALL_USERS_SUCCESS,
@@ -282,7 +278,7 @@ export const updateUser = (id, userData) => async (dispatch) => {
     };
 
     const { data } = await axios.put(
-      `${baseUrl}/admin/user/${id}`,
+      `/api/v1/admin/user/${id}`,
       userData,
       config
     );
@@ -306,7 +302,7 @@ export const getUserDetails = (id) => async (dispatch) => {
       type: USER_DETAILS_REQUEST,
     });
 
-    const { data } = await axios.get(`${baseUrl}/admin/user/${id}`);
+    const { data } = await axios.get(`/api/v1/admin/user/${id}`);
 
     dispatch({
       type: USER_DETAILS_SUCCESS,
@@ -327,7 +323,7 @@ export const deleteUser = (id) => async (dispatch) => {
       type: DELETE_USER_REQUEST,
     });
 
-    const { data } = await axios.delete(`${baseUrl}/admin/user/${id}`);
+    const { data } = await axios.delete(`/api/v1/admin/user/${id}`);
 
     dispatch({
       type: DELETE_USER_SUCCESS,

@@ -20,8 +20,8 @@ import {
   CLEAR_ERRORS,
 } from "../constants/orderConstants";
 import axios from "axios";
-import axiosInstance from "./axiosConfig";
-import { baseUrl } from "./baseUrl";
+// import axiosInstance from "./axiosConfig";
+// import { baseUrl } from "./baseUrl";
 
 // Set default options for all requests
 axios.defaults.withCredentials = true;
@@ -39,7 +39,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post(`${baseUrl}/order/new`, order, config);
+    const { data } = await axios.post(`/api/v1/order/new`, order, config);
 
     dispatch({
       type: CREATE_ORDER_SUCCESS,
@@ -60,7 +60,7 @@ export const myOrders = () => async (dispatch) => {
       type: MY_ORDERS_REQUEST,
     });
 
-    const { data } = await axiosInstance.get(`/orders/me`);
+    const { data } = await axios.get(`/api/v1/orders/me`);
 
     dispatch({
       type: MY_ORDERS_SUCCESS,
@@ -81,7 +81,7 @@ export const getOrderdetails = (id) => async (dispatch) => {
       type: ORDERS_DETAILS_REQUEST,
     });
 
-    const { data } = await axios.get(`${baseUrl}/order/${id}`);
+    const { data } = await axios.get(`/api/v1/order/${id}`);
 
     dispatch({
       type: ORDERS_DETAILS_SUCCESS,
@@ -102,7 +102,7 @@ export const allOrders = () => async (dispatch) => {
       type: ALL_ORDERS_REQUEST,
     });
 
-    const { data } = await axios.get(`${baseUrl}/admin/orders`);
+    const { data } = await axios.get(`/api/v1/admin/orders`);
 
     dispatch({
       type: ALL_ORDERS_SUCCESS,
@@ -130,7 +130,7 @@ export const updateOrder = (id, orderData) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `${baseUrl}/admin/order/${id}`,
+      `/api/v1/admin/order/${id}`,
       orderData,
       config
     );
@@ -154,7 +154,7 @@ export const deleteOrder = (id) => async (dispatch, getState) => {
       type: DELETE_ORDER_REQUEST,
     });
 
-    const { data } = await axios.delete(`${baseUrl}/order/${id}`);
+    const { data } = await axios.delete(`/api/v1/order/${id}`);
 
     dispatch({
       type: DELETE_ORDER_SUCCESS,
