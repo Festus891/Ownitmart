@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
 });
 
 // Define your API routes
-app.get("/api/v1/products", (req, res) => {
+app.get("/api/v1/product", (req, res) => {
   res.send("Example API endpoint");
 });
 
