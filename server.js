@@ -1,17 +1,10 @@
-const app = require("./backend/app");
 const connectDatabase = require("./backend/config/database");
 
 // const dotenv = require("dotenv");
-// const cloudinary = require("cloudinary");
-
+const cloudinary = require("cloudinary");
 const express = require("express");
 const app = express();
 const cors = require("cors");
-// module.exports = app;
-// const corsOptions = {
-//   origin: "http://localhost:3000", // replace with your frontend domain
-//   credentials: true,
-// };
 
 app.use(cors());
 
@@ -19,15 +12,19 @@ const cookieParser = require("cookie-parser");
 const bodyparser = require("body-parser");
 const fileUpload = require("express-fileupload");
 
-const dotenv = require("dotenv");
+// const dotenv = require("dotenv");
 const path = require("path");
 
-const errorMiddleware = require("./middlewares/errors");
+const errorMiddleware = require("./backend/middlewares/errors");
+
+// Handlingg Uncaught exception error
+process.on("uncaughtException", (err) => {
+  console.log(`Error: ${err.stack}`);
+  console.log("Shutting down due to uncaught exception");
+  process.exit(1);
+});
 
 //setting up config file
-if (process.env.NODE_ENV !== "PRODUCTION") {
-  dotenv.config({ path: "backend/config/config.env" });
-}
 
 // Example route
 app.get("/", (req, res) => {
@@ -45,10 +42,10 @@ app.use(cookieParser());
 app.use(fileUpload());
 
 // import of all route
-const products = require("./routes/product");
-const auth = require("./routes/auth");
-const payment = require("./routes/payment");
-const order = require("./routes/order");
+const products = require("./backend/routes/product");
+const auth = require("./backend/routes/auth");
+const payment = require("./backend/routes/payment");
+const order = require("./backend/routes/order");
 
 app.use("/api/v1", products);
 app.use("/api/v1", auth);
@@ -65,17 +62,6 @@ app.use("/api/v1", order);
 
 // Middleware to handle errors
 app.use(errorMiddleware);
-
-module.exports = app;
-
-// Handlingg Uncaught exception error
-process.on("uncaughtException", (err) => {
-  console.log(`Error: ${err.stack}`);
-  console.log("Shutting down due to uncaught exception");
-  process.exit(1);
-});
-
-//setting up config file
 
 //setting up config file
 if (process.env.NODE_ENV !== "PRODUCTION") {
