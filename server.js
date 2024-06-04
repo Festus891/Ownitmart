@@ -1,21 +1,8 @@
+const app = require("./backend/app");
 const connectDatabase = require("./backend/config/database");
 
 // const dotenv = require("dotenv");
 const cloudinary = require("cloudinary");
-const express = require("express");
-const app = express();
-const cors = require("cors");
-
-app.use(cors());
-
-const cookieParser = require("cookie-parser");
-const bodyparser = require("body-parser");
-const fileUpload = require("express-fileupload");
-
-// const dotenv = require("dotenv");
-const path = require("path");
-
-const errorMiddleware = require("./backend/middlewares/errors");
 
 // Handlingg Uncaught exception error
 process.on("uncaughtException", (err) => {
@@ -25,43 +12,6 @@ process.on("uncaughtException", (err) => {
 });
 
 //setting up config file
-
-// Example route
-app.get("/", (req, res) => {
-  res.send("API is working and CORS-enabled for all origins!");
-});
-
-// Define your API routes
-app.get("/api/v1/product", (req, res) => {
-  res.send("Example API endpoint");
-});
-
-app.use(express.json());
-app.use(bodyparser.urlencoded({ extended: true }));
-app.use(cookieParser());
-app.use(fileUpload());
-
-// import of all route
-const products = require("./backend/routes/product");
-const auth = require("./backend/routes/auth");
-const payment = require("./backend/routes/payment");
-const order = require("./backend/routes/order");
-
-app.use("/api/v1", products);
-app.use("/api/v1", auth);
-app.use("/api/v1", payment);
-app.use("/api/v1", order);
-
-// if (process.env.NODE_ENV === "PRODUCTION") {
-//   app.use(express.static(path.join(__dirname, "../frontend/build")));
-
-//   app.get("*", (req, res) => {
-//     res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
-//   });
-// }
-
-// Middleware to handle errors
-app.use(errorMiddleware);
 
 //setting up config file
 if (process.env.NODE_ENV !== "PRODUCTION") {
